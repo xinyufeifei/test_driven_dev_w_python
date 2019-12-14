@@ -10,7 +10,7 @@ Provisioning a new site
 eg, On Ubuntu:
     sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt-get update
-    sudo apt-get install nginx git python37 python2.7-venv
+    sudo apt-get install nginx git python3.7 python3.7-venv
 
 ## Nginx Virtual Host config
 
