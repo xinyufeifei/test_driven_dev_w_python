@@ -4,13 +4,17 @@ from django.core.exceptions import ValidationError
 from lists.models import Item, List
 
 
-class ListandItemModelTest(TestCase):
-    def text_item_is_related_to_list(self):
+class ItemModelTest(TestCase):
+    def test_default_text(self):
+        item = Item()
+        self.assertEqual(item.text, "")
+
+    def test_item_is_related_to_list(self):
         list_ = List.objects.create()
         item = Item()
         item.list = list_
         item.save()
-        self.assertIn(Item, list_.item_set.all())
+        self.assertIn(item, list_.item_set.all())
 
     def test_cannot_save_empty_list_items(self):
         list_ = List.objects.create()
@@ -43,12 +47,6 @@ class ListandItemModelTest(TestCase):
     def test_string_representation(self):
         item = Item(text="some text")
         self.assertEqual(str(item), "some text")
-
-
-class ItemModelTest(TestCase):
-    def test_default_text(self):
-        item = Item()
-        self.assertEqual(item.text, "")
 
 
 class ListModelTest(TestCase):
