@@ -23,9 +23,11 @@ def send_login_mail(request):
 
 def login(request):
     user = auth.authenticate(uid=request.GET.get("token"))
-    print("using login view")
-    print("uid is", request.GET.get("token"))
-    print("this is user:", user)
     if user:
         auth.login(request, user)
+    return redirect("/")
+
+
+def logout(request):
+    auth.logout(request)
     return redirect("/")
