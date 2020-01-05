@@ -33,7 +33,7 @@ def _get_latest_source(source_folder):
 def _update_settings(source_folder, site_name):
     setting_path = source_folder + "/superlists/settings.py"
     sed(setting_path, "DEBUG = True", "DEBUG = False")
-    sed(setting_path, "ALLOWED_HOST = .+$", f'ALLOWED_HOSTS = ["{site_name}"]')
+    sed(setting_path, "ALLOWED_HOSTS =.+$", f'ALLOWED_HOSTS = ["{site_name}"]')
     secret_key_file = source_folder + "/superlists/secret_key.py"
     if not exists(secret_key_file):
         chars = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)"
@@ -48,7 +48,7 @@ def _update_virtualenv(source_folder):
         run(f"python3.7 -m venv {virtualenv_folder}")
     run(
         f"source {virtualenv_folder}/bin/activate"
-        f"&& pip install poetry"
+        f"&& pip install poetry==1.0.0"
         f"&& cd {source_folder} && poetry install && deactivate"
     )
 
