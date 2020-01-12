@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.conf import settings
 
 
-# Create your models here.rm lis
 class List(models.Model):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.PROTECT
