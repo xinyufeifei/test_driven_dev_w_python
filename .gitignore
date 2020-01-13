@@ -1,6 +1,7 @@
 db.sqlite3
 geckodriver.log
 *.json
+functional_tests/screendumps/*
 __pycache__
 *.pyc
 superlists.egg-info*
