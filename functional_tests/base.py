@@ -19,6 +19,20 @@ SCREEN_DUMP_LOCATION = os.path.join(
 )
 
 
+def wait(fn):
+    def modified_fn(*args, **kwargs):
+        start_time = time.time()
+        while True:
+            try:
+                return fn(*args, **kwargs)
+            except (AssertionError, WebDriverException) as e:
+                if time.time() - start_time > MAX_WAIT:
+                    raise e
+                time.sleep(0.5)
+
+    return modified_fn
+
+
 class FunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -73,19 +87,6 @@ class FunctionalTest(StaticLiveServerTestCase):
             windowid=self._windownid,
             timestamp=timestamp,
         )
-
-    def wait(fn):
-        def modified_fn(*args, **kwargs):
-            start_time = time.time()
-            while True:
-                try:
-                    return fn(*args, **kwargs)
-                except (AssertionError, WebDriverException) as e:
-                    if time.time() - start_time > MAX_WAIT:
-                        raise e
-                    time.sleep(0.5)
-
-        return modified_fn
 
     def add_list_item(self, item_text):
         num_rows = len(self.browser.find_elements_by_css_selector("#id_list_table tr"))
