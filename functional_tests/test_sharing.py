@@ -15,7 +15,7 @@ def quit_if_possible(browser):
 class SharingTest(FunctionalTest):
     def test_can_share_a_list_with_another_user(self):
         # Edith is a logged-in user
-        self.create_pre_authenticated_session("edity@example.com")
+        self.create_pre_authenticated_session("edith@example.com")
         edith_browser = self.browser
         self.addCleanup(lambda: quit_if_possible(edith_browser))
 
@@ -58,4 +58,4 @@ class SharingTest(FunctionalTest):
         # When Edith refreshers the page, she sees Oniciferous's addition
         self.browser = edith_browser
         self.browser.refresh()
-        list_page.wait_for_row_in_list_table("Hi, Edith", 2)
+        list_page.wait_for_row_in_list_table("Hi Edith!", 2)
