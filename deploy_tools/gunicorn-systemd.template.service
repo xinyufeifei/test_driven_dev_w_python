@@ -5,6 +5,8 @@ Description=Gunicorn server for SITENAME
 Restart=on-failure
 User=xinyufeifei
 WorkingDirectory=/home/xinyufeifei/sites/SITENAME/source
+Environment=EMAIL_ADDRESS=a@b.com
+Environment=EMAIL_PASSWORD=secret_password
 ExecStart=/home/xinyufeifei/sites/SITENAME/virtualenv/bin/gunicorn \
     --bind unix:/tmp/SITENAME.socket \
     superlists.wsgi:application
